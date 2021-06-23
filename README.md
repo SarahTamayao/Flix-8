@@ -48,7 +48,7 @@ GIF created with [Kap](https://getkap.co/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Working with an API was interesting and had some challenges associated with it but overall this project was a great learning experience!
 
 ## Credits
 
