@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *genresCardView;
 @property (weak, nonatomic) IBOutlet UIButton *trailerButton;
 @property (weak, nonatomic) IBOutlet UILabel *genresLabel;
+@property (weak, nonatomic) IBOutlet UIButton *moreButton;
 
 @end
 
@@ -36,9 +37,14 @@
     self.descriptionLabel.text = self.movie[@"overview"];
     self.genresLabel.text = self.genres;
     
-    [self.titleLabel sizeToFit];
-    [self.descriptionLabel sizeToFit];
+    if (self.descriptionLabel.text.length > 307){
+        self.descriptionLabel.text = [self.descriptionLabel.text substringToIndex:307];
+        self.descriptionLabel.text = [self.descriptionLabel.text stringByAppendingString:@"..."];
+        self.moreButton.hidden = false;
+    }
     
+    
+    NSLog(@"%@", self.descriptionLabel.text);
     NSNumber *rating = self.movie[@"vote_average"];
     self.ratingLabel.text = [NSString stringWithFormat: @"%.1f",[rating doubleValue]];
     self.cosmosView.rating = [rating doubleValue]/2.0;

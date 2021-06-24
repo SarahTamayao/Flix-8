@@ -118,6 +118,8 @@
     NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", movie[@"poster_path"]];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    
 
     cell.posterView.image = [UIImage imageNamed:@"film"];;
     __weak MovieCollectionCell *weakSelf = cell;
