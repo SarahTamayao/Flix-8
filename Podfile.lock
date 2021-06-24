@@ -14,17 +14,25 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Cosmos (23.0.0)
+  - youtube-ios-player-helper (1.0.3)
 
 DEPENDENCIES:
   - AFNetworking
+  - Cosmos
+  - youtube-ios-player-helper
 
 SPEC REPOS:
   trunk:
     - AFNetworking
+    - Cosmos
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
 
-PODFILE CHECKSUM: ce25344a8a99a5a4b6fc60531dd02407b995b150
+PODFILE CHECKSUM: 856a671f16a70a078408c913859433dd08033d49
 
 COCOAPODS: 1.10.1

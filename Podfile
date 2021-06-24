@@ -7,6 +7,8 @@ target 'Flix' do
 
   # Pods for Flix
   pod 'AFNetworking'
+  pod 'Cosmos'
+  pod 'youtube-ios-player-helper'
 
   target 'FlixTests' do
     inherit! :search_paths
