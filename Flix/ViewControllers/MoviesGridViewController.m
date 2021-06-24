@@ -68,13 +68,12 @@
                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                [alert addAction:okAction];
                [self presentViewController:alert animated:YES completion:^{}];
-               
-               
            }
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
                self.movies = dataDictionary[@"results"];
+               self.filteredData = self.movies;
                [self.collectionView reloadData];
                
            }
@@ -180,7 +179,7 @@
      
      UITableViewCell *tappedCell = sender;
      NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
-     NSDictionary *movie = self.movies[indexPath.item];
+     NSDictionary *movie = self.filteredData[indexPath.item];
      
      DetailsViewController *detailsViewController = [segue destinationViewController];
      detailsViewController.movie = movie;
