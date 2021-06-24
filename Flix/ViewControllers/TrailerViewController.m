@@ -27,7 +27,7 @@
     [self.playerView loadWithVideoId:<#(nonnull NSString *)#>];
 }
 
--(void)fetchVideo{
+//-(void)fetchVideo{
     //[self.activityIndicatorView startAnimating];
 //    NSString *urlString = [NSString stringWithFormat:@"https://api.themoviedb.org/3/movie/%@/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed", self.movie[@"id"]];
 //    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
@@ -40,8 +40,8 @@
 //               UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
 //               [alert addAction:okAction];
 //               [self presentViewController:alert animated:YES completion:^{}];
-//               
-//               
+//
+//
 //           }
 //           else {
 //               NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -52,9 +52,9 @@
            }
 //        [self.refreshControl endRefreshing];
 //        [self.activityIndicatorView stopAnimating];
-       }];
-    [task resume];
-}
+//       }];
+//    [task resume];
+//}
 
 /*
 #pragma mark - Navigation
