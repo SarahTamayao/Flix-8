@@ -37,9 +37,7 @@
     self.descriptionLabel.text = self.movie[@"overview"];
     self.genresLabel.text = self.genres;
     
-    if (self.descriptionLabel.text.length > 307){
-        self.descriptionLabel.text = [self.descriptionLabel.text substringToIndex:307];
-        self.descriptionLabel.text = [self.descriptionLabel.text stringByAppendingString:@"..."];
+    if (self.descriptionLabel.text.length > 350){
         self.moreButton.hidden = false;
     }
     
