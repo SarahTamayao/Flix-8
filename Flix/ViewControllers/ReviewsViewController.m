@@ -6,6 +6,7 @@
 //
 
 #import "ReviewsViewController.h"
+#import "ReviewModalViewController.h"
 #import "ReviewCell.h"
 
 @interface ReviewsViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -72,15 +73,19 @@
     return cell;
 }
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     UITableViewCell *tappedCell = sender;
+     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+     NSDictionary *review = self.reviews[indexPath.row];
+     
+     ReviewModalViewController *modal = [segue destinationViewController];
+     modal.review = review;
  }
- */
+ 
 
 @end
 

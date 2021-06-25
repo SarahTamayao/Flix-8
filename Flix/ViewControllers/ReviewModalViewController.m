@@ -1,26 +1,27 @@
 //
-//  DescriptionViewController.m
+//  ReviewModalViewController.m
 //  Flix
 //
 //  Created by Pranitha Reddy Kona on 6/24/21.
 //
 
-#import "DescriptionViewController.h"
+#import "ReviewModalViewController.h"
 
-@interface DescriptionViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@interface ReviewModalViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *reviewLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cardView;
 
 @end
 
-@implementation DescriptionViewController
+@implementation ReviewModalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.reviewLabel.text = self.review[@"content"];
     self.cardView.layer.cornerRadius = 5.0;
-    self.descriptionLabel.text = self.movie[@"overview"];
+    
+    //[self.reviewLabel sizeToFit];
 }
-
 - (IBAction)onTap:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
