@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *trailerButton;
 @property (weak, nonatomic) IBOutlet UILabel *genresLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (weak, nonatomic) IBOutlet UIButton *reviewsButton;
+@property (weak, nonatomic) IBOutlet UIButton *castButton;
 
 @end
 
@@ -29,9 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.cardView.layer.cornerRadius = 5.0;
+    self.cardView.layer.cornerRadius = 15.0;
     self.genresCardView.layer.cornerRadius = 5.0;
     self.trailerButton.layer.cornerRadius = 0.5 * self.trailerButton.bounds.size.width;
+    self.reviewsButton.layer.cornerRadius = 10;
+    self.castButton.layer.cornerRadius = 10;
     
     self.titleLabel.text = self.movie[@"title"];
     self.descriptionLabel.text = self.movie[@"overview"];

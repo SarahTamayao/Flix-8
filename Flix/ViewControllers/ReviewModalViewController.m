@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.reviewLabel.text = self.review[@"content"];
-    self.cardView.layer.cornerRadius = 5.0;
+    self.cardView.layer.cornerRadius = 15.0;
     
     //[self.reviewLabel sizeToFit];
 }

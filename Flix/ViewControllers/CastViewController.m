@@ -73,7 +73,7 @@
     CastCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CastCollectionCell" forIndexPath:indexPath];
     NSDictionary *actor = self.actors[indexPath.item];
     
-    cell.cardView.layer.cornerRadius = 10.0;
+    cell.cardView.layer.cornerRadius = 15.0;
     
     cell.actorLabel.text = actor[@"name"];
     cell.characterLabel.text = actor[@"character"];

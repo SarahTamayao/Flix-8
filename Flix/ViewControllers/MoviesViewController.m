@@ -31,10 +31,19 @@
     [self fetchGenres];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:1];
+    self.refreshControl.tintColor = [UIColor colorWithRed:222 green:97 blue:86 alpha:1];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
+    
+//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:233 green:237 blue:248 alpha:1] forKey:@"background_color"];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:255 green:255 blue:255 alpha:1] forKey:@"card_color"];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:222 green:297 blue:86 alpha:1] forKey:@"accent_color"];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:85 green:85 blue:85 alpha:1] forKey:@"text_color"];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] forKey:@"title_color"];
+//    [standardUserDefaults setObject:[UIColor colorWithRed:222 green:297 blue:86 alpha:1] forKey:@"star_color"];
+//    [standardUserDefaults synchronize];
 }
 
 -(void)fetchMovies{
@@ -161,6 +170,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     NSDictionary *movie = self.movies[indexPath.row];
     
+    //if ([segue destinationViewController] )
     DetailsViewController *detailsViewController = [segue destinationViewController];
     detailsViewController.movie = movie;
     

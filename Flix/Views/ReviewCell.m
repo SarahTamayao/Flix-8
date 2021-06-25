@@ -11,7 +11,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.cardView.layer.cornerRadius = 5.0;
+    self.cardView.layer.cornerRadius = 15.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -12,7 +12,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.cardView.layer.cornerRadius = 5.0;
+    self.cardView.layer.cornerRadius = 15.0;
     self.posterView.layer.cornerRadius = 5.0;
 }
 

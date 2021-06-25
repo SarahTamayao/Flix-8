@@ -21,8 +21,8 @@
     
     //self.backdropView.
     
-    NSString *baseURLSmallString = @"https://image.tmdb.org/t/p/w200";
-    NSString *baseURLLargeString = @"https://image.tmdb.org/t/p/w500";
+    static NSString *baseURLSmallString = @"https://image.tmdb.org/t/p/w200";
+    static NSString *baseURLLargeString = @"https://image.tmdb.org/t/p/w500";
     
     NSURL *urlSmall = [NSURL URLWithString:[baseURLSmallString stringByAppendingString:self.movie[@"backdrop_path"]]];
     NSURL *urlLarge = [NSURL URLWithString:[baseURLLargeString stringByAppendingString:self.movie[@"backdrop_path"]]];
