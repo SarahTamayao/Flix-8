@@ -36,9 +36,7 @@
     
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    [standardUserDefaults setObject:[NSMutableArray array] forKey:@"favorites"];
-    [standardUserDefaults synchronize];
+    
     
 }
 

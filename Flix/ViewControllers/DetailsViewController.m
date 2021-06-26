@@ -46,8 +46,15 @@
     }
     
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableSet *set = [standardUserDefaults objectForKey:@"favorites"];
-    self.isFavorite = [set containsObject:self.movie];
+    NSMutableArray *array = [standardUserDefaults objectForKey:@"favorites"];
+    if (array){
+        self.isFavorite = [array containsObject:self.movie];
+    }
+    else{
+        [standardUserDefaults setObject:[NSMutableArray array] forKey:@"favorites"];
+        [standardUserDefaults synchronize];
+        self.isFavorite = false;
+    }
     
     NSLog(@"%@", self.descriptionLabel.text);
     NSNumber *rating = self.movie[@"vote_average"];
