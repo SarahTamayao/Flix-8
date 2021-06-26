@@ -10,7 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MoviesGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MoviesGridViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
 @property (nonatomic, strong) NSArray *movies;
 @property (nonatomic, strong) NSMutableDictionary *genres;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -152,9 +152,9 @@
     return self.filteredData.count;
 }
 
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    NSString *searchText = searchController.searchBar.text;
+   // NSString *searchText = searchBar.text;
     if (searchText) {
         
         if (searchText.length != 0) {
@@ -173,6 +173,11 @@
 
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *searchView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SearchBar" forIndexPath:indexPath];
+    
+    return searchView;
+}
 #pragma mark - Navigation
 
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

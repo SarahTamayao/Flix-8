@@ -172,7 +172,7 @@
                                 <color key="backgroundColor" red="0.82849025730000003" green="0.86878812309999998" blue="0.95687526460000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4jd-uu-gZJ">
                                     <size key="itemSize" width="182" height="283"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="50" height="55"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
@@ -183,7 +183,7 @@
                                 </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionCell" id="P3S-Cp-uKM" customClass="MovieCollectionCell">
-                                        <rect key="frame" x="0.0" y="50" width="182" height="283"/>
+                                        <rect key="frame" x="0.0" y="55" width="182" height="283"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="B6O-Fw-xKM">
                                             <rect key="frame" x="0.0" y="0.0" width="182" height="283"/>
@@ -203,16 +203,22 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eU4-HW-frg">
-                                    <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="SearchBar" id="eU4-HW-frg" customClass="SearchCollectionReusableView">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rJ8-m4-UvG">
-                                            <rect key="frame" x="0.0" y="6" width="390" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="oD2-8C-TcK" id="K0k-En-EBq"/>
+                                            </connections>
                                         </searchBar>
                                     </subviews>
+                                    <connections>
+                                        <outlet property="searchBar" destination="rJ8-m4-UvG" id="QEH-he-mar"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
