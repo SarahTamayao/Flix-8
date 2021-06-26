@@ -17,12 +17,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cardView;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet CosmosView *cosmosView;
-@property (weak, nonatomic) IBOutlet UIImageView *genresCardView;
 @property (weak, nonatomic) IBOutlet UIButton *trailerButton;
 @property (weak, nonatomic) IBOutlet UILabel *genresLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIButton *reviewsButton;
 @property (weak, nonatomic) IBOutlet UIButton *castButton;
+@property (weak, nonatomic) IBOutlet UIButton *favoritesButton;
+@property (nonatomic) bool isFavorite;
 
 @end
 
@@ -32,7 +33,6 @@
     [super viewDidLoad];
     
     self.cardView.layer.cornerRadius = 15.0;
-    self.genresCardView.layer.cornerRadius = 5.0;
     self.trailerButton.layer.cornerRadius = 0.5 * self.trailerButton.bounds.size.width;
     self.reviewsButton.layer.cornerRadius = 10;
     self.castButton.layer.cornerRadius = 10;
@@ -45,6 +45,9 @@
         self.moreButton.hidden = false;
     }
     
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableSet *set = [standardUserDefaults objectForKey:@"favorites"];
+    self.isFavorite = [set containsObject:self.movie];
     
     NSLog(@"%@", self.descriptionLabel.text);
     NSNumber *rating = self.movie[@"vote_average"];
@@ -88,6 +91,34 @@
            // possibly try to get the large image
        }];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    if (self.isFavorite){
+        [self.favoritesButton setImage:[UIImage imageNamed:@"filledheart"] forState: UIControlStateNormal] ;
+    }
+    else{
+        [self.favoritesButton setImage:[UIImage imageNamed:@"emptyheart"] forState: UIControlStateNormal] ;
+    }
+}
+
+- (IBAction)favoritesButtonPress:(id)sender {
+    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *array = [[standardUserDefaults objectForKey:@"favorites"] mutableCopy];
+    //NSData *movieEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:self.movie requiringSecureCoding:true error:nil];
+    self.isFavorite = !self.isFavorite;
+    if (self.isFavorite){
+        [self.favoritesButton setImage:[UIImage imageNamed:@"filledheart"] forState: UIControlStateNormal] ;
+        [array addObject:self.movie];
+    }
+    else{
+        [self.favoritesButton setImage:[UIImage imageNamed:@"emptyheart"] forState: UIControlStateNormal] ;
+        [array removeObject:self.movie];
+    }
+    [standardUserDefaults setObject:array forKey:@"favorites"];
+    [standardUserDefaults synchronize];
+    
 }
 
 

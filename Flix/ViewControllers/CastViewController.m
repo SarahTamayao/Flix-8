@@ -83,7 +83,7 @@
     
 
     if (actor[@"profile_path"] == (id)[NSNull null]){
-        cell.photoView.image = [UIImage imageNamed:@"film"];;
+        cell.photoView.image = [UIImage imageNamed:@"film2"];;
     }
     else {
         NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", actor[@"profile_path"]];
@@ -91,7 +91,7 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         
         cell.photoView.layer.cornerRadius = 15.0;
-        cell.photoView.image = [UIImage imageNamed:@"film"];;
+        cell.photoView.image = [UIImage imageNamed:@"film2"];;
         
         __weak CastCollectionCell *weakSelf = cell;
         [cell.photoView setImageWithURLRequest:request placeholderImage:nil

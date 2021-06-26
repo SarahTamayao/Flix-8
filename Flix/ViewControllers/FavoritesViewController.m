@@ -1,77 +1,47 @@
 //
-//  MoviesViewController.m
+//  FavoritesViewController.m
 //  Flix
 //
-//  Created by Pranitha Reddy Kona on 6/23/21.
+//  Created by Pranitha Reddy Kona on 6/25/21.
 //
 
-#import "MoviesViewController.h"
+#import "FavoritesViewController.h"
 #import "DetailsViewController.h"
-#import "MovieCell.h"
+#import "FavoriteCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface MoviesViewController () <UITableViewDelegate, UITableViewDataSource>
-
-@property (nonatomic, strong) NSArray *movies;
-@property (nonatomic, strong) NSMutableDictionary *genres;
+@interface FavoritesViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) NSArray *movies;
+@property (strong, nonatomic) NSMutableDictionary *genres;
 
 @end
 
-@implementation MoviesViewController
+@implementation FavoritesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.dataSource = self;
     self.tableView.delegate =self;
-    [self fetchMovies];
+    
     [self fetchGenres];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = [UIColor colorWithRed:222 green:97 blue:86 alpha:1];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
-    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
-    
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    [standardUserDefaults setObject:[NSMutableArray array] forKey:@"favorites"];
-    [standardUserDefaults synchronize];
+    self.movies = [standardUserDefaults objectForKey:@"favorites"];
     
+    NSLog(@"%@",self.movies);
 }
 
--(void)fetchMovies{
-    [self.activityIndicatorView startAnimating];
-    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           if (error != nil) {
-               NSLog(@"%@", [error localizedDescription]);
-               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot get movies" message:@"The internet connection appears to be offline." preferredStyle:(UIAlertControllerStyleAlert)];
-               UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-               [alert addAction:okAction];
-               [self presentViewController:alert animated:YES completion:^{}];
-               
-               
-           }
-           else {
-               NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
-               self.movies = dataDictionary[@"results"];
-               [self.tableView reloadData];
-               
-           }
-        [self.activityIndicatorView stopAnimating];
-        [self.refreshControl endRefreshing];
-       }];
-    [task resume];
+- (void)viewWillAppear:(BOOL)animated{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    self.movies = [standardUserDefaults objectForKey:@"favorites"];
+    [self.tableView reloadData];
+    
 }
 
 -(void)fetchGenres{
-    [self.activityIndicatorView startAnimating];
+    [self.activityIndicator startAnimating];
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/genre/movie/list?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -96,20 +66,20 @@
                [self.tableView reloadData];
                
            }
-        [self.refreshControl endRefreshing];
-        [self.activityIndicatorView stopAnimating];
+        [self.activityIndicator stopAnimating];
        }];
     [task resume];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.movies.count;
 }
-//label.adjustsFontSizeToFitWidth = true
-//label.minimumScaleFactor = 0.2
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
+    FavoriteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FavoriteCell"];
+    
+    cell.cardView.layer.cornerRadius = 10;
+    cell.posterView.layer.cornerRadius = 15;
     
     NSDictionary *movie = self.movies[indexPath.row];
     cell.titleLabel.text = movie[@"title"];
@@ -128,8 +98,8 @@
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
-    cell.posterView.image = [UIImage imageNamed:@"film2"];
-    __weak MovieCell *weakSelf = cell;
+    cell.posterView.image = [UIImage imageNamed:@"film"];
+    __weak FavoriteCell *weakSelf = cell;
     [cell.posterView setImageWithURLRequest:request placeholderImage:nil
           success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
         // imageResponse will be nil if the image is cached
@@ -155,27 +125,26 @@
     return cell;
 }
 
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    NSDictionary *movie = self.movies[indexPath.row];
-    
-    //if ([segue destinationViewController] )
-    DetailsViewController *detailsViewController = [segue destinationViewController];
-    detailsViewController.movie = movie;
-    
-    NSString *genresString = @"";
-    for (id genreId in movie[@"genre_ids"]){
-        genresString = [genresString stringByAppendingString:[NSString stringWithFormat: @"%@, ",self.genres[genreId]]];
-    }
-    detailsViewController.genres =  [genresString substringToIndex:genresString.length-2];;
-}
-
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+     // Get the new view controller using [segue destinationViewController].
+     // Pass the selected object to the new view controller.
+     
+     UITableViewCell *tappedCell = sender;
+     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+     NSDictionary *movie = self.movies[indexPath.row];
+     
+     //if ([segue destinationViewController] )
+     DetailsViewController *detailsViewController = [segue destinationViewController];
+     detailsViewController.movie = movie;
+     
+     NSString *genresString = @"";
+     for (id genreId in movie[@"genre_ids"]){
+         genresString = [genresString stringByAppendingString:[NSString stringWithFormat: @"%@, ",self.genres[genreId]]];
+     }
+     detailsViewController.genres =  [genresString substringToIndex:genresString.length-2];;
+ }
 
 @end

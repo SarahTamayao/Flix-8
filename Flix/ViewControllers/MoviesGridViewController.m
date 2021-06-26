@@ -33,14 +33,14 @@
     [self fetchGenres];
     self.filteredData = self.movies;
     
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.searchBar.barTintColor = [UIColor colorWithRed:4 green:7 blue:32 alpha:1];
-    self.searchController.searchResultsUpdater = self;
-    [self.collectionView addSubview: self.searchController.searchBar];
-    self.searchController.obscuresBackgroundDuringPresentation = NO;
-    [self.searchController.searchBar sizeToFit];
-    [self.collectionView contentInsetAdjustmentBehavior];
-    self.definesPresentationContext = true;
+//    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+//    self.searchController.searchBar.barTintColor = [UIColor colorWithRed:4 green:7 blue:32 alpha:1];
+//    self.searchController.searchResultsUpdater = self;
+//    [self.collectionView addSubview: self.searchController.searchBar];
+//    self.searchController.obscuresBackgroundDuringPresentation = NO;
+//    [self.searchController.searchBar sizeToFit];
+//    [self.collectionView contentInsetAdjustmentBehavior];
+//    self.definesPresentationContext = true;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:1];
