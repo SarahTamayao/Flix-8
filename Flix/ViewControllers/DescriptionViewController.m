@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cardView.layer.cornerRadius = 5.0;
+    self.cardView.layer.cornerRadius = 10.0;
     self.descriptionLabel.text = self.movie[@"overview"];
 }
 

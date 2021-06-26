@@ -33,14 +33,6 @@
     [self fetchGenres];
     self.filteredData = self.movies;
     
-//    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-//    self.searchController.searchBar.barTintColor = [UIColor colorWithRed:4 green:7 blue:32 alpha:1];
-//    self.searchController.searchResultsUpdater = self;
-//    [self.collectionView addSubview: self.searchController.searchBar];
-//    self.searchController.obscuresBackgroundDuringPresentation = NO;
-//    [self.searchController.searchBar sizeToFit];
-//    [self.collectionView contentInsetAdjustmentBehavior];
-//    self.definesPresentationContext = true;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = [UIColor colorWithRed:255 green:255 blue:255 alpha:1];
@@ -111,6 +103,10 @@
     [task resume];
 }
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.filteredData.count;
+}
+
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
     NSDictionary *movie = self.filteredData[indexPath.item];
@@ -148,13 +144,8 @@
     return cell;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.filteredData.count;
-}
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-   // NSString *searchText = searchBar.text;
     if (searchText) {
         
         if (searchText.length != 0) {
@@ -171,6 +162,17 @@
         
     }
 
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = YES;
+}
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = NO;
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
